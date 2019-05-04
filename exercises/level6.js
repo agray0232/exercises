@@ -1,13 +1,37 @@
 function lvl6exercise1 (num) {
   // Return 'hello' if num is 1, 'world' if num is 2, otherwise return 'bye'
+  var response = "";
+  if(num == 1)
+  {
+    response = "hello";
+  }
+  else if(num == 2)
+  {
+    response = "world";
+  }
+  else if(num == 3)
+  {
+    response = "bye";
+  }
+  return response;
 }
 
 function lvl6exercise2 () {
   // Push 10 'hello' strings into the array using a for loop, then return it
   var arr = []
+  for(var i = 0; i < 10; i++)
+  {
+    arr.push("hello");
+  }
+  return arr;
 }
 
 function lvl6exercise3 () {
   // Empty this array using a while loop and return it
   var arr = ['hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello']
+  while(arr.length > 0)
+  {
+    arr.pop();
+  }
+  return arr;
 }
