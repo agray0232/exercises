@@ -2,13 +2,13 @@ function biggestNumber(numberList)
 {
     var biggestNumber = Number.MIN_VALUE;
 
-    for(numIndex = 0; numIndex < numberList.length; numIndex++)
+    numberList.forEach(function(number)
     {
-        if (numberList[numIndex] > biggestNumber)
+        if(number > biggestNumber)
         {
-            biggestNumber = numberList[numIndex];
+            biggestNumber = number;
         }
-    }
+    })
 
     return biggestNumber;
 }
