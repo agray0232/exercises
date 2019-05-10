@@ -1,34 +1,3 @@
-// Question 1: Given an array of people's names, write a function that logs "Hi, [name]!"
-// for each person
-
-
-// Question 2: Given an array of a first, middle, and last name, write a function that
-// prints the person's initials
-
-// Question 3: Given a list of 0's and 1's, write a function that retuns the index of the
-// last 1 in the array
-
-// Question 4: Given a list of positive numbers, write a function that returns the
-// biggest number
-
-function biggestNumber(numberList)
-{
-    var biggestNumber = Number.MIN_VALUE;
-
-    for(numIndex = 0; numIndex < numberList.length; numIndex++)
-    {
-        if (numberList[numIndex] > biggestNumber)
-        {
-            biggestNumber = numberList[numIndex];
-        }
-    }
-
-    return biggestNumber;
-}
-
-var assert = require('assert');
-assert.equal(biggestNumber([10, 2, 3]), 10);
-assert.equal(biggestNumber([1.3, 3.2, -3, 20]), 20);
 
 var resultsArray = [{country: "usa", 
                      time: 223}, 
