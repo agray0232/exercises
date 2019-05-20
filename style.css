@@ -1,0 +1,39 @@
+body{
+    margin: 0px 0px 0px 0px;
+}
+#Summary{
+    margin-top: 0px;
+}
+header{
+    text-align: center;
+    color: #55CC55;
+    background-color: black;
+    position: fixed;
+    width: 100%;
+    margin: 0px 0px;
+    padding: 20px 0px;
+    border-width: 0px;
+}
+h1{
+    margin: 0px 0px;
+}
+p{
+    color: black
+}
+h2{
+    color:midnightblue
+}
+body{
+    background-color:pink;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+main{
+    padding-top: 100px;
+    padding-left:10px;
+}
+html{
+    margin-top: 0px;
+    padding-top: 0px;
+}
