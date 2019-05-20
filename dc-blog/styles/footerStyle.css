@@ -1,0 +1,20 @@
+footer{
+    width: 75%;
+    margin: auto;
+}
+#footerButtons{
+    padding-left: 0px;
+}
+#footerButtons li{
+    display: inline-block;
+    font-family: "Roboto", sans-serif;
+    color: Gray;
+    padding-right:15px;
+}
+#Copywrite{
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    color: Gray;
+    font-size: 11px;
+    padding-top: 30px;
+}
