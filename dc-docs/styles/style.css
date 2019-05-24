@@ -1,0 +1,89 @@
+html, body{
+    height:100%;
+}
+
+body, #side-bar, #main{
+    display:inline-block;
+}
+
+ /******************* Side Bar *******************/
+
+ /* General styling */
+#side-bar{
+    width:220px;
+    min-height:100%;
+    vertical-align:top;
+    text-align:left;
+    padding-right:30px;
+    padding-left:30px;
+    background-color:gray;
+    position: fixed;
+}
+
+/* Side bar highlight on hover */
+.side-bar{
+    color:lightgray;
+}
+.side-bar:hover{
+    color:white;
+}
+.side-bar #title{
+    color:white;
+}
+.side-bar #option-list{
+    color:lightgray;
+}
+.side-bar a:hover{
+    color:white;
+}
+.side-bar #copyright{
+    color:lightgray;
+}
+
+/* Search bar */
+form input{
+    background-color:gray;
+    border-style:solid;
+    border-color:lightgray;
+    border-radius:3px;
+    width:200px;
+    outline:none;
+    color:lightgray;
+}
+form input:hover{
+    border-color:white;
+}
+form input::placeholder{
+    color:lightgray;
+}
+form input::placeholder:hover{
+    color:white;
+}
+
+
+/* Option list */
+#option-list{
+    list-style:none;
+    text-align:left;
+    padding-inline-start:0px;
+}
+.side-bar li{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+a{
+    text-decoration:none;
+}
+a:link, a:visited, a:active{
+    color:lightgray;
+}
+
+#copyright{
+    padding-top:400px;
+}
+
+
+ /******************* Main *******************/
+#main{
+    width:50%;
+}
