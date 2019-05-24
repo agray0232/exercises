@@ -1,0 +1,17 @@
+.flex-container{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 350px;
+    height: 400px;
+}
+
+.flex-container div{
+    background-color: red;
+    height:50px;
+    width:50px;
+}
+
+.flex-container div:nth-child(odd){
+    background-color: black;
+}
