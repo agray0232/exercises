@@ -5,7 +5,6 @@
 //*******************************************************
 function renderTransactions(transactions) {
 	var finalHTML = '<div class="buffer">TRANSACTIONS</div>';
-
 	var transactionsHTML = transactions.map(function (transaction) {
 		var transactionHTML = `
 		<div class="transaction">
@@ -18,7 +17,7 @@ function renderTransactions(transactions) {
 		return transactionHTML;
 	});
 
-	finalHTML += transactionsHTML.join();
+	finalHTML += transactionsHTML.join("");
 
 	return finalHTML;
 }

@@ -4,7 +4,7 @@ var fullTransactionData = [
 		for: "Groceries",
 		date: "April 26th",
 		amount: "$62.20"
-	}, 
+	},
 	{
 		name: "Nicole Stevens",
 		for: "Drinks",
@@ -90,7 +90,7 @@ var fullTransactionData = [
 		amount: "$25.00"
 	},
 	{
-		name: "Roger Stevens" ,
+		name: "Roger Stevens",
 		for: "Dancing Goats",
 		date: "March 16th",
 		amount: "$10.19"
