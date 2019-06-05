@@ -5,8 +5,7 @@
 //*******************************************************
 function renderTransactions(transactions) {
 	var finalHTML = '<div class="buffer">TRANSACTIONS</div>';
-
-	var transactionsHTML = transactions.map(function () {
+	var transactionsHTML = transactions.map(function (transaction) {
 		var transactionHTML = `
 		<div class="transaction">
 			<div class="name">${transaction.name}</div>
@@ -30,7 +29,6 @@ function renderTransactions(transactions) {
 //*******************************************************
 document.addEventListener("DOMContentLoaded", function () {
 	document.getElementById('transactions').innerHTML = renderTransactions(fullTransactionData);
-
 	document.getElementById('search-input').addEventListener('input', function (e) {
 		var searchString = e.target.value.toLowerCase();
 		var filteredData = fullTransactionData.filter(function (transaction) {
