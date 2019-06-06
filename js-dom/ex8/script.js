@@ -11,18 +11,29 @@
 var button = document.getElementById("add-button");
 var input = document.getElementById("description");
 var taskList = document.getElementById('todo-list');
+var strikeElements = document.getElementsByClassName("click-strike");
 
 button.addEventListener("click", function () {
-    //debugger;
     var newTask = input.value;
     addTask(newTask);
 })
 
-function addTask(newTask) {
+for (i = 0; i < strikeElements.length; i++) {
+    addStrikeListener(strikeElements[i]);
+}
 
+function addTask(newTask) {
     if (newTask !== "") {
         var newTaskElement = document.createElement("li");
         newTaskElement.innerHTML = newTask;
+        newTaskElement.className = "click-strike";
+        addStrikeListener(newTaskElement);
         taskList.appendChild(newTaskElement);
     }
+}
+
+function addStrikeListener(element) {
+    element.addEventListener('click', function () {
+        element.style.textDecoration = "line-through";
+    })
 }
