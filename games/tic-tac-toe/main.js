@@ -3,14 +3,16 @@ var gameDataStorage =
 {
     gameRunning: true,
     gameState: "initializing",
-    refreshRate: 500,
+    refreshRate: 750,
     board:
         [["", "", ""],
         ["", "", ""],
         ["", "", ""]],
+    message: "",
     startingPlayer: "X",
     activePlayer: "",
     winner: "",
+    playAgainClass: "",
     plays: 0,
     minPlays: 4,
     boardSize: [3, 3]
@@ -27,16 +29,17 @@ function run() {
             case "playing":
                 if (checkWinner()) {
                     gameDataStorage.gameState = "complete";
+                    gameDataStorage.playAgainClass = "visible";
                 }
                 break;
             case "complete":
-                window.alert("Winner!");
                 break;
             default:
                 break;
         }
+        setMessage();
         content.innerHTML = renderBoard(gameDataStorage.board);
-
+        //debugger;
         setTimeout(run, gameDataStorage.refreshRate);
     }
 }
@@ -48,7 +51,9 @@ function intializeGame(startingPlayer) {
         ["-", "-", "-"],
         ["-", "-", "-"]];
     gameDataStorage.gameState = "playing";
+    gameDataStorage.message = `It's player ${gameDataStorage.activePlayer}'s turn!`;
     gameDataStorage.plays = 0;
+    gameDataStorage.playAgainClass = "invisible";
 }
 
 function markSpace(row, column) {
@@ -89,7 +94,7 @@ function checkWinner() {
 
 function checkRow(index) {
     var foundWin = false;
-    var row = gameDataStorage.board[0]
+    var row = gameDataStorage.board[index];
     if (row[0] !== "-" && row[0] === row[1] && row[0] === row[2]) {
         foundWin = true;
         gameDataStorage.winner = row[0];
@@ -98,13 +103,47 @@ function checkRow(index) {
 }
 
 function checkCol(index) {
+    var foundWin = false;
+    if (gameDataStorage.board[0][index] !== "-" &&
+        gameDataStorage.board[0][index] === gameDataStorage.board[1][index] &&
+        gameDataStorage.board[0][index] === gameDataStorage.board[2][index]) {
+        foundWin = true;
+        gameDataStorage.winner = gameDataStorage.board[0][index];
+    }
+    return foundWin;
+}
 
+function checkDiagonal() {
+    var foundWin = false;
+
+    return foundWin;
+}
+
+function setMessage() {
+    switch (gameDataStorage.gameState) {
+        case "initializing":
+            gameDataStorage.message = "";
+            break;
+        case "playing":
+            gameDataStorage.message = `It's player ${gameDataStorage.activePlayer}'s turn!`;
+            break;
+        case "complete":
+            if (gameDataStorage.winner !== "") {
+                gameDataStorage.message = `Player ${gameDataStorage.winner} won!`;
+            }
+            else {
+                gameDataStorage.message = "Tie!";
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 function renderBoard(board) {
     return `
         <div class="container d-flex flex-column justify-content-start align-items-center">
-            <h4>It's player ${gameDataStorage.activePlayer}'s turn!</h4>
+            <h4>${gameDataStorage.message}</h4>
             <div class="w-50 text-center">
                 <button onclick="markSpace(0,0)">${board[0][0]}</button>
                 <button onclick="markSpace(0,1)">${board[0][1]}</button>
@@ -120,6 +159,9 @@ function renderBoard(board) {
                 <button onclick="markSpace(2,1)">${board[2][1]}</button>
                 <button onclick="markSpace(2,2)">${board[2][2]}</button>
             </div>
+        </div>  
+        <div class="${gameDataStorage.playAgainClass} container d-flex flex-column justify-content-start align-items-center">
+            <button onclick="gameDataStorage.gameState=\'initializing\';" class="text-center" id="PlayAgain">Play again</button>
         </div>
     `
 }
