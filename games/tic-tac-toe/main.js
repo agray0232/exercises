@@ -88,6 +88,9 @@ function checkWinner() {
                 winnerFound = true;
             }
         }
+        if (checkDiagonal()) {
+            winnerFound = true;
+        }
     }
     return winnerFound;
 }
@@ -115,7 +118,18 @@ function checkCol(index) {
 
 function checkDiagonal() {
     var foundWin = false;
-
+    if (gameDataStorage.board[0][0] !== "-" &&
+        gameDataStorage.board[0][0] === gameDataStorage.board[1][1] &&
+        gameDataStorage.board[0][0] === gameDataStorage.board[2][2]) {
+        foundWin = true;
+        gameDataStorage.winner = gameDataStorage.board[0][0];
+    }
+    if (gameDataStorage.board[0][2] !== "-" &&
+        gameDataStorage.board[0][2] === gameDataStorage.board[1][1] &&
+        gameDataStorage.board[0][2] === gameDataStorage.board[2][0]) {
+        foundWin = true;
+        gameDataStorage.winner = gameDataStorage.board[0][2];
+    }
     return foundWin;
 }
 
