@@ -9,6 +9,7 @@ var gameConfig =
     message: "",
     startingPlayer: "X",
     minPlays: 4,
+    maxPlays: 9,
     boardSize: [3, 3]
 }
 var gameData =
@@ -35,7 +36,7 @@ function run() {
                 intializeGame(gameConfig.startingPlayer);
                 break;
             case "playing":
-                if (checkWinner()) {
+                if (checkWinner() || checkTie()) {
                     gameData.gameState = "complete";
                     gameData.playAgainClass = "visible";
                 }
@@ -47,7 +48,6 @@ function run() {
         }
         setMessage();
         content.innerHTML = renderBoard(gameData.board);
-        //debugger;
         setTimeout(run, gameConfig.refreshRate);
     }
 }
@@ -71,6 +71,7 @@ function markSpace(row, column) {
 }
 
 function switchPlayer() {
+    debugger;
     switch (gameData.activePlayer) {
         case "X":
             gameData.activePlayer = "O";
@@ -81,6 +82,14 @@ function switchPlayer() {
         default:
             break;
     }
+}
+
+function checkTie() {
+    var tie = false;
+    if (gameData.plays === gameConfig.maxPlays) {
+        tie = true;
+    }
+    return tie;
 }
 
 function checkWinner() {
@@ -142,7 +151,7 @@ function checkDiagonal() {
 }
 
 function setMessage() {
-    switch (gameConfig.gameState) {
+    switch (gameData.gameState) {
         case "initializing":
             gameData.message = "";
             break;
