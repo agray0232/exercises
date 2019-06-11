@@ -1,8 +1,6 @@
 var content = document.getElementById('content');
-var gameDataStorage =
+var gameConfig =
 {
-    gameRunning: true,
-    gameState: "initializing",
     refreshRate: 750,
     board:
         [["", "", ""],
@@ -10,26 +8,36 @@ var gameDataStorage =
         ["", "", ""]],
     message: "",
     startingPlayer: "X",
-    activePlayer: "",
-    winner: "",
-    playAgainClass: "",
-    plays: 0,
     minPlays: 4,
     boardSize: [3, 3]
 }
+var gameData =
+{
+    gameRunning: true,
+    gameState: "initializing",
+    board:
+        [["", "", ""],
+        ["", "", ""],
+        ["", "", ""]],
+    message: "",
+    activePlayer: "",
+    winner: "",
+    playAgainClass: "",
+    plays: 0
+}
 
-setTimeout(run, gameDataStorage.refreshRate);
+setTimeout(run, gameConfig.refreshRate);
 
 function run() {
-    if (gameDataStorage.gameRunning) {
-        switch (gameDataStorage.gameState) {
+    if (gameData.gameRunning) {
+        switch (gameData.gameState) {
             case "initializing":
-                intializeGame(gameDataStorage.startingPlayer);
+                intializeGame(gameConfig.startingPlayer);
                 break;
             case "playing":
                 if (checkWinner()) {
-                    gameDataStorage.gameState = "complete";
-                    gameDataStorage.playAgainClass = "visible";
+                    gameData.gameState = "complete";
+                    gameData.playAgainClass = "visible";
                 }
                 break;
             case "complete":
@@ -38,37 +46,37 @@ function run() {
                 break;
         }
         setMessage();
-        content.innerHTML = renderBoard(gameDataStorage.board);
+        content.innerHTML = renderBoard(gameData.board);
         //debugger;
-        setTimeout(run, gameDataStorage.refreshRate);
+        setTimeout(run, gameConfig.refreshRate);
     }
 }
 
 function intializeGame(startingPlayer) {
-    gameDataStorage.activePlayer = gameDataStorage.startingPlayer;
-    gameDataStorage.board =
+    gameData.activePlayer = gameConfig.startingPlayer;
+    gameData.board =
         [["-", "-", "-"],
         ["-", "-", "-"],
         ["-", "-", "-"]];
-    gameDataStorage.gameState = "playing";
-    gameDataStorage.message = `It's player ${gameDataStorage.activePlayer}'s turn!`;
-    gameDataStorage.plays = 0;
-    gameDataStorage.playAgainClass = "invisible";
+    gameData.gameState = "playing";
+    gameData.message = `It's player ${gameData.activePlayer}'s turn!`;
+    gameData.plays = 0;
+    gameData.playAgainClass = "invisible";
 }
 
 function markSpace(row, column) {
-    gameDataStorage.board[row][column] = gameDataStorage.activePlayer;
-    gameDataStorage.plays++;
+    gameData.board[row][column] = gameData.activePlayer;
+    gameData.plays++;
     switchPlayer();
 }
 
 function switchPlayer() {
-    switch (gameDataStorage.activePlayer) {
+    switch (gameData.activePlayer) {
         case "X":
-            gameDataStorage.activePlayer = "O";
+            gameData.activePlayer = "O";
             break;
         case "O":
-            gameDataStorage.activePlayer = "X";
+            gameData.activePlayer = "X";
             break;
         default:
             break;
@@ -77,13 +85,13 @@ function switchPlayer() {
 
 function checkWinner() {
     var winnerFound = false;
-    if (gameDataStorage.plays > gameDataStorage.minPlays) {
-        for (i = 0; i < gameDataStorage.boardSize[0]; i++) {
+    if (gameData.plays > gameConfig.minPlays) {
+        for (i = 0; i < gameConfig.boardSize[0]; i++) {
             if (checkRow(i)) {
                 winnerFound = true;
             }
         }
-        for (i = 0; i < gameDataStorage.boardSize[1]; i++) {
+        for (i = 0; i < gameConfig.boardSize[1]; i++) {
             if (checkCol(i)) {
                 winnerFound = true;
             }
@@ -97,56 +105,56 @@ function checkWinner() {
 
 function checkRow(index) {
     var foundWin = false;
-    var row = gameDataStorage.board[index];
+    var row = gameData.board[index];
     if (row[0] !== "-" && row[0] === row[1] && row[0] === row[2]) {
         foundWin = true;
-        gameDataStorage.winner = row[0];
+        gameData.winner = row[0];
     }
     return foundWin;
 }
 
 function checkCol(index) {
     var foundWin = false;
-    if (gameDataStorage.board[0][index] !== "-" &&
-        gameDataStorage.board[0][index] === gameDataStorage.board[1][index] &&
-        gameDataStorage.board[0][index] === gameDataStorage.board[2][index]) {
+    if (gameData.board[0][index] !== "-" &&
+        gameData.board[0][index] === gameData.board[1][index] &&
+        gameData.board[0][index] === gameData.board[2][index]) {
         foundWin = true;
-        gameDataStorage.winner = gameDataStorage.board[0][index];
+        gameData.winner = gameData.board[0][index];
     }
     return foundWin;
 }
 
 function checkDiagonal() {
     var foundWin = false;
-    if (gameDataStorage.board[0][0] !== "-" &&
-        gameDataStorage.board[0][0] === gameDataStorage.board[1][1] &&
-        gameDataStorage.board[0][0] === gameDataStorage.board[2][2]) {
+    if (gameData.board[0][0] !== "-" &&
+        gameData.board[0][0] === gameData.board[1][1] &&
+        gameData.board[0][0] === gameData.board[2][2]) {
         foundWin = true;
-        gameDataStorage.winner = gameDataStorage.board[0][0];
+        gameData.winner = gameData.board[0][0];
     }
-    if (gameDataStorage.board[0][2] !== "-" &&
-        gameDataStorage.board[0][2] === gameDataStorage.board[1][1] &&
-        gameDataStorage.board[0][2] === gameDataStorage.board[2][0]) {
+    if (gameData.board[0][2] !== "-" &&
+        gameData.board[0][2] === gameData.board[1][1] &&
+        gameData.board[0][2] === gameData.board[2][0]) {
         foundWin = true;
-        gameDataStorage.winner = gameDataStorage.board[0][2];
+        gameData.winner = gameData.board[0][2];
     }
     return foundWin;
 }
 
 function setMessage() {
-    switch (gameDataStorage.gameState) {
+    switch (gameConfig.gameState) {
         case "initializing":
-            gameDataStorage.message = "";
+            gameData.message = "";
             break;
         case "playing":
-            gameDataStorage.message = `It's player ${gameDataStorage.activePlayer}'s turn!`;
+            gameData.message = `It's player ${gameData.activePlayer}'s turn!`;
             break;
         case "complete":
-            if (gameDataStorage.winner !== "") {
-                gameDataStorage.message = `Player ${gameDataStorage.winner} won!`;
+            if (gameData.winner !== "") {
+                gameData.message = `Player ${gameData.winner} won!`;
             }
             else {
-                gameDataStorage.message = "Tie!";
+                gameData.message = "Tie!";
             }
             break;
         default:
@@ -154,28 +162,36 @@ function setMessage() {
     }
 }
 
+function getDisabled(row, col) {
+    var disabled = "";
+    if (gameData.board[row][col] !== "-" && gameData.board[row][col] !== "") {
+        disabled = "disabled";
+    }
+    return disabled;
+}
+
 function renderBoard(board) {
     return `
         <div class="container d-flex flex-column justify-content-start align-items-center">
-            <h4>${gameDataStorage.message}</h4>
+            <h4>${gameData.message}</h4>
             <div class="w-50 text-center">
-                <button onclick="markSpace(0,0)">${board[0][0]}</button>
-                <button onclick="markSpace(0,1)">${board[0][1]}</button>
-                <button onclick="markSpace(0,2)">${board[0][2]}</button>
+                <button onclick="markSpace(0,0)" ${getDisabled(0, 0)}>${board[0][0]}</button>
+                <button onclick="markSpace(0,1)" ${getDisabled(0, 1)}>${board[0][1]}</button>
+                <button onclick="markSpace(0,2)" ${getDisabled(0, 2)}>${board[0][2]}</button>
             </div>
             <div class="w-50 text-center">
-                <button onclick="markSpace(1,0)">${board[1][0]}</button>
-                <button onclick="markSpace(1,1)">${board[1][1]}</button>
-                <button onclick="markSpace(1,2)">${board[1][2]}</button>
+                <button onclick="markSpace(1,0)" ${getDisabled(1, 0)}>${board[1][0]}</button>
+                <button onclick="markSpace(1,1)" ${getDisabled(1, 1)}>${board[1][1]}</button>
+                <button onclick="markSpace(1,2)" ${getDisabled(1, 2)}>${board[1][2]}</button>
             </div>
             <div class="w-50 text-center">
-                <button onclick="markSpace(2,0)">${board[2][0]}</button>
-                <button onclick="markSpace(2,1)">${board[2][1]}</button>
-                <button onclick="markSpace(2,2)">${board[2][2]}</button>
+                <button onclick="markSpace(2,0)" ${getDisabled(2, 0)}>${board[2][0]}</button>
+                <button onclick="markSpace(2,1)" ${getDisabled(2, 1)}>${board[2][1]}</button>
+                <button onclick="markSpace(2,2)" ${getDisabled(2, 2)}>${board[2][2]}</button>
             </div>
         </div>  
-        <div class="${gameDataStorage.playAgainClass} container d-flex flex-column justify-content-start align-items-center">
-            <button onclick="gameDataStorage.gameState=\'initializing\';" class="text-center" id="PlayAgain">Play again</button>
+        <div class="${gameData.playAgainClass} container d-flex flex-column justify-content-start align-items-center">
+            <button onclick="gameData.gameState=\'initializing\';" class="text-center" id="PlayAgain">Play again</button>
         </div>
     `
 }
