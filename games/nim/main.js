@@ -1,19 +1,29 @@
 var content = document.getElementById('content');
 
-var nim = "Replace this with your own abstraction of Nim"
+var gameState = {
+    remainingPebbles: 3,
+    activePlayer: "Player 1",
+    numToTake: 0,
+    maxToTake: 3,
+    message: ""
+}
 
-content.innerHTML = renderGame(nim);
+setMessage();
+content.innerHTML = renderGame();
 
 
+function setMessage() {
+    gameState.message = `It's ${gameState.activePlayer}'s turn! How many pebbles will you take?`
+}
 
-
-function renderGame(game) {
+function renderGame() {
     // Change this render function to use the "game" parameter
 
     return `
         <div class="container d-flex flex-column justify-content-start align-items-center">
-            <h4>There are 16 pebbles left</h4>
+            <h4>There are ${gameState.remainingPebbles} pebbles left</h4>
             <div class="w-50 text-center pebble-container">
+                ${renderPebbles()}
                 <div class="pebble"></div>
                 <div class="pebble"></div>
                 <div class="pebble"></div>
@@ -31,7 +41,7 @@ function renderGame(game) {
                 <div class="pebble"></div>
                 <div class="pebble"></div>
             </div>
-            <h4 class="mt-5">It's player 1's turn! How many pebbles will you take?</h4>
+            <h4 class="mt-5">${gameState.message}</h4>
             <div>
                 <select id="takeInput">
                     <option value="1">1</option>
@@ -42,4 +52,9 @@ function renderGame(game) {
             </div>
         </div>
     `
+}
+
+function renderPebbles() {
+    var pebblesHTML = `<div class="pebble"></div> `.repeat(gameState.remainingPebbles);
+    return pebblesHTML;
 }
