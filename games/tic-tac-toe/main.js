@@ -173,7 +173,8 @@ function setMessage() {
 
 function getDisabled(row, col) {
     var disabled = "";
-    if (gameData.board[row][col] !== "-" && gameData.board[row][col] !== "") {
+    if (gameData.gameState !== "playing" ||
+        (gameData.board[row][col] !== "-" && gameData.board[row][col] !== "")) {
         disabled = "disabled";
     }
     return disabled;
