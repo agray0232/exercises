@@ -21,8 +21,9 @@ function play(choice) {
 }
 
 function chooseRandom() {
-    var choice = "Scissors";
-
+    var choice = "";
+    choices = ["Scissors", "Rock", "Paper"];
+    choice = choices[Math.floor(Math.random() * 3)];
     return choice;
 }
 
