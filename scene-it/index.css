@@ -10,7 +10,16 @@ body {
 	color: #50524F;
 }
 
-.results {
+#movies-container {
 	margin-top: 20px;
 }
 
+.card{
+	margin-left:15px;
+	margin-right:15px;
+	margin-bottom:15px;
+}
+
+.btn-primary{
+	vertical-align: bottom;
+}
