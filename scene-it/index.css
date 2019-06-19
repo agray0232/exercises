@@ -1,13 +1,13 @@
 body {
-	background-color: #B2E9FD;
+	background-color: #404040;
 }
 
 .header h2 {
-	color: #DC4247;
+	color: #cccccc;
 }
 
 .header p {
-	color: #50524F;
+	color: #999999;
 }
 
 #movies-container {
@@ -18,6 +18,7 @@ body {
 	margin-left:15px;
 	margin-right:15px;
 	margin-bottom:15px;
+	background-color: #999999;
 }
 
 .btn-primary{
