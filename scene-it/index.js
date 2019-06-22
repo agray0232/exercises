@@ -3,22 +3,25 @@ let searchInput;
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("search-form").addEventListener("submit", function (e) {
         e.preventDefault();
-        searchInput = document.getElementById("search-bar").value.toLowerCase();
-        renderMovies(movieData, searchInput);
+        var searchInput = document.getElementById("search-bar").value.toLowerCase();
+        var sanitizedSearchInput = encodeURIComponent(searchInput);
+        var movieData = $.get("http://www.omdbapi.com/?apikey=3430a78&s=" + sanitizedSearchInput)
+            .then(renderMovies);
+
     });
 });
 
-function renderMovies(moviesArray, searchInput) {
+function renderMovies(movieData) {
+    debugger;
     var results = document.getElementById("movies-container");
-    var moviesHTML = moviesArray.map(renderMovie);
+    var moviesHTML = movieData.Search.map(renderMovie);
     results.innerHTML = moviesHTML.join("");
 }
 
 function renderMovie(currentMovie) {
     var movieHTML = ``;
 
-    if (movieSearched(currentMovie)) {
-        movieHTML = `
+    movieHTML = `
         <div class="card col-3 movie">
             <img class="card-img-top" src=\"${currentMovie.Poster}\" alt="Card image cap">
                 <div class="card-body">
@@ -28,9 +31,6 @@ function renderMovie(currentMovie) {
             </div>
         </div>
         `
-    } else {
-        movieHTML = ``;
-    }
 
     return movieHTML;
 }
@@ -47,7 +47,6 @@ function movieSearched(movie) {
 }
 
 function saveToWatchlist(imdbID) {
-
     var watchlistJSON = localStorage.getItem('watchlist');
     var watchlist = JSON.parse(watchlistJSON);
 
@@ -60,7 +59,6 @@ function saveToWatchlist(imdbID) {
             return currentMovie.imdbID === imdbID;
         })
 
-
         watchlist.push(movie);
         watchlistJSON = JSON.stringify(watchlist);
         localStorage.setItem('watchlist', watchlistJSON);
@@ -68,7 +66,6 @@ function saveToWatchlist(imdbID) {
 }
 
 function watchlistContains(watchlist, imdbID) {
-    debugger;
     var contains = false;
 
     watchlist.forEach(function (watchlistMovie) {
