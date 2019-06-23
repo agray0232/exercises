@@ -1,20 +1,19 @@
 let searchInput;
+let querier = new MovieQuerier();
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("search-form").addEventListener("submit", function (e) {
         e.preventDefault();
         var searchInput = document.getElementById("search-bar").value.toLowerCase();
-        var sanitizedSearchInput = encodeURIComponent(searchInput);
-        var movieData = $.get("http://www.omdbapi.com/?apikey=3430a78&s=" + sanitizedSearchInput)
-            .then(renderMovies);
-
+        var moviesPromise = querier.queryMoviesByTitle(searchInput);
+        moviesPromise.then(renderMovies);
     });
 });
 
-function renderMovies(movieData) {
-    debugger;
+function renderMovies(movies) {
+    console.log("Rendering");
     var results = document.getElementById("movies-container");
-    var moviesHTML = movieData.Search.map(renderMovie);
+    var moviesHTML = movies.map(renderMovie);
     results.innerHTML = moviesHTML.join("");
 }
 
@@ -27,7 +26,7 @@ function renderMovie(currentMovie) {
                 <div class="card-body">
                     <h5 class="card-title">${currentMovie.Title}</h5>
                     <p class="card-text">Released: ${currentMovie.Year}</p>
-                    <a href="#" class="btn btn-primary" onClick="saveToWatchlist(\'${currentMovie.imdbID}\')">Add</a>
+                    <a class="btn btn-primary" onClick="saveToWatchlist(\'${currentMovie.imdbID}\')">Add</a>
             </div>
         </div>
         `
@@ -47,6 +46,7 @@ function movieSearched(movie) {
 }
 
 function saveToWatchlist(imdbID) {
+    debugger;
     var watchlistJSON = localStorage.getItem('watchlist');
     var watchlist = JSON.parse(watchlistJSON);
 
