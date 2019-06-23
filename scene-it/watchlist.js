@@ -1,15 +1,23 @@
+var querier = new MovieQuerier();
+
 document.addEventListener("DOMContentLoaded", function () {
     var watchlistJSON = localStorage.getItem('watchlist');
     var watchlist = JSON.parse(watchlistJSON);
 
     if (watchlist !== null) {
-        renderMovies(watchlist);
+        getMovies(watchlist).then(renderMovies);
     }
 })
 
-function renderMovies(watchlist) {
+function getMovies(watchlist) {
+    moviePromises = watchlist.map(querier.queryMovieByImdbId);
+
+    return Promise.all(moviePromises);
+}
+
+function renderMovies(movies) {
     var results = document.getElementById("movies-container");
-    var moviesHTML = watchlist.map(renderMovie);
+    var moviesHTML = movies.map(renderMovie);
     results.innerHTML = moviesHTML.join("");
 }
 
@@ -22,7 +30,7 @@ function renderMovie(currentMovie) {
                 <div class="card-body">
                     <h5 class="card-title">${currentMovie.Title}</h5>
                     <p class="card-text">Released: ${currentMovie.Year}</p>
-                    <a href="#" class="btn btn-primary" onClick="saveToWatchlist(\'${currentMovie.imdbID}\')">Add</a>
+                    <a class="btn btn-primary" onClick="saveToWatchlist(\'${currentMovie.imdbID}\')">Add</a>
             </div>
         </div>
         `

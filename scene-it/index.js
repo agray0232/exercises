@@ -1,17 +1,15 @@
 let searchInput;
-let querier = new MovieQuerier();
+var querier = new MovieQuerier();
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("search-form").addEventListener("submit", function (e) {
         e.preventDefault();
         var searchInput = document.getElementById("search-bar").value.toLowerCase();
-        var moviesPromise = querier.queryMoviesByTitle(searchInput);
-        moviesPromise.then(renderMovies);
+        querier.queryMoviesByKeyword(searchInput).then(renderMovies);
     });
 });
 
 function renderMovies(movies) {
-    console.log("Rendering");
     var results = document.getElementById("movies-container");
     var moviesHTML = movies.map(renderMovie);
     results.innerHTML = moviesHTML.join("");
@@ -46,7 +44,6 @@ function movieSearched(movie) {
 }
 
 function saveToWatchlist(imdbID) {
-    debugger;
     var watchlistJSON = localStorage.getItem('watchlist');
     var watchlist = JSON.parse(watchlistJSON);
 
@@ -55,11 +52,7 @@ function saveToWatchlist(imdbID) {
     }
 
     if (!watchlistContains(watchlist, imdbID)) {
-        var movie = movieData.find(function (currentMovie) {
-            return currentMovie.imdbID === imdbID;
-        })
-
-        watchlist.push(movie);
+        watchlist.push(imdbID);
         watchlistJSON = JSON.stringify(watchlist);
         localStorage.setItem('watchlist', watchlistJSON);
     }
