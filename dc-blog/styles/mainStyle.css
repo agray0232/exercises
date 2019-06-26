@@ -1,0 +1,38 @@
+main{
+    padding-top:50px;
+    width: 75%;
+    margin: auto;
+}
+#EssayTitle{
+    width: 50%;
+    margin: auto;
+    font-size: 30px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    padding-bottom:25px;
+    text-align: center;
+}
+#EssayBody{
+    padding-top: 15px; 
+    padding-bottom: 15px;
+    opacity: .90;
+}
+#EssaySubTitle{
+    width: 25%;
+    margin: auto;
+}
+#Date, #Social{
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    padding:5px;
+    width: 150px;
+    margin: auto;
+    text-align: center;
+}
+#Date{
+    opacity: 0.5;
+}
+#Social{
+    background:#4788ef;
+    color: white;
+}
