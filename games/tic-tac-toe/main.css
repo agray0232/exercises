@@ -1,0 +1,21 @@
+button, button:disabled {
+    width: 30px;
+    background-color:#d8d8d8;
+    color:#262626;
+}
+
+button:focus {
+    outline:0;
+}
+
+.invisible{
+    display: none;
+}
+
+.visible{
+    padding-top: 25px;
+}
+
+#PlayAgain{
+    width: 100px;
+}
