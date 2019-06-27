@@ -1,0 +1,22 @@
+.dark {
+    background-color: navy;
+    color: white;
+  }
+  
+  .green {
+    background-color: green;
+    color: white;
+  }
+  
+  .red {
+    background-color: red;
+    color: black;
+  }
+  
+  header {
+    padding: 20px;
+  }
+  
+  header nav {
+    margin-left: auto;
+  }
