@@ -1,0 +1,17 @@
+{
+  "name": "gray-package",
+  "version": "1.0.0",
+  "description": "gray-package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anthony Gray",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "download-file": "^0.1.5",
+    "lodash": "^4.17.14",
+    "wallpaper": "^4.4.1"
+  }
+}
