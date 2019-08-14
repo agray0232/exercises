@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <a href="/welcome">Home</a>
+    <a href="/signOut">Sign Out</a>
+
+    <h1><%= email %> id: <%= user_id %>'s Messages</h1>
+    <% messages.forEach(function(message) { %>
+    <div>
+        <span><%= message.subject %></span>
+        <br />
+        <span><%= message.body %></span>
+        <br />
+        <span>by: <%= message.user.email %></span>
+    </div><br />
+    <% }) %>
+</body>
+
+</html>
