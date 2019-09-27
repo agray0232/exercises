@@ -2,7 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Switch, Route, NavLink } from 'react-router-dom';
-import Content from './Content';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
         </ul>
       </header>
 
-
       <Switch>
         <Route path="/2">
           <Content num={2} />
@@ -28,7 +26,6 @@ function App() {
           <Content num={1} />
         </Route>
       </Switch>
-
 
       <footer>Bye!</footer>
     </div>
